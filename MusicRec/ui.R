@@ -4,7 +4,7 @@ library("dplyr")
 library("tidyr")
 
 first_page <- tabPanel(
-    "Ethnic-Based Info ",
+    "About us",
     sidebarLayout(
         sidebarPanel(
             sliderInput(
@@ -22,9 +22,9 @@ first_page <- tabPanel(
         ),
         
         mainPanel(
-            h3("Average Percentage of Different Ethnic Groups Based on Area"),
-            tableOutput(outputId = "pop_first"),
-            h3("Population of Different Ethnic Groups Based on State"),
+            h3("App Introduction"),
+            img(src = "Logo.png", height = 80, width = 80),
+            p("This application "),
             plotOutput(outputId = "pop_second")
         )
     )
@@ -49,9 +49,6 @@ second_page <- tabPanel(
         ),
         
         mainPanel(
-            h3("App Introduction"),
-            img(src = "Logo.png", height = 80, width = 80),
-            p("This application "),
             h3("Population of Different Indices Based on State"),
             plotOutput(outputId = "pop_forth")
         )
