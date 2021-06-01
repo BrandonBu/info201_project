@@ -1,6 +1,7 @@
-
-library("dplyr")
 library("shiny")
+library("ggplot2")
+library("dplyr")
+library("tidyr")
 
 first_page <- tabPanel(
     "Ethnic-Based Info ",
