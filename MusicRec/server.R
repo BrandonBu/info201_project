@@ -28,6 +28,11 @@ shinyServer(function(input, output) {
         }
     })
     
+    output$pie_description <- renderText({
+        paste0("This is a pie chart that will tell you how people with the similar demograpic to you enjoy listening to music. 
+               People choose 5 in music means they enjoy very much.")
+    })
+    
     output$pie_message <- renderText({
         data <- sample() %>%
             group_by(interest) %>%
