@@ -1,7 +1,7 @@
 # Music Preference analysis
 
 group project BC 5
-Group Member: Peiwen Yu, Mina Gao, Zihan Lin, Brandon Bu
+Group Member: Vivian (Peiwen) Yu, Mina Gao, Zihan Lin, Brandon Bu
 
 # Description
 This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music.
