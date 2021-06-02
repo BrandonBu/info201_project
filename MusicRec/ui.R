@@ -2,6 +2,8 @@
 library("dplyr")
 library("shiny")
 
+music <- read.csv("data/responses.csv", stringsAsFactors=FALSE)
+
 first_page <- tabPanel(
     "About us",
         mainPanel(
@@ -9,31 +11,22 @@ first_page <- tabPanel(
             h3("App Introduction"), 
             tags$p("This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music. These include: gender, education level, and time spends on internet everyday. In the second page, Table & Plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
             tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!")
-        ),
-    "Group Member Discussion"
+        )
 )
 
 second_page <- tabPanel(
     "Table",
     sidebarLayout(
         sidebarPanel(
-            sliderInput(
-                inputId = "area_ind",
-                label = "please adjust the area of county",
-                min = range(midwest$area)[1],
-                max = range(midwest$area)[2],
-                value = range(midwest$area)[1]
-            ),
-            radioButtons(
-                inputId = "state_ind",
-                label = "please select a state",
-                choices = unique(midwest$state)
-            )
+            uiOutput("gender"),
+            uiOutput("education"),
+            uiOutput("internet")
         ),
         
+        # Show a plot of the generated distribution
         mainPanel(
-            h3("Population of Different Indices Based on State"),
-            plotOutput(outputId = "pop_forth")
+            plotOutput("music_pie"),
+            plotOutput("genre_bar")
         )
     )
 )
