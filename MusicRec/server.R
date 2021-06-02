@@ -20,10 +20,31 @@ shinyServer(function(input, output) {
         data <- sample() %>%
             group_by(interest) %>%
             summarise(observation = n())
-        ggplot(data, aes(x = "", y = observation, fill = interest)) +
-            geom_bar(stat='identity', width = 1) + 
-            coord_polar("y", start=0) +
-            theme_void()
+        if(nrow(data) != 0) {
+            ggplot(data, aes(x = "", y = observation, fill = interest)) +
+                geom_bar(stat='identity', width = 1) + 
+                coord_polar("y", start=0) +
+                theme_void()
+        }
+    })
+    
+    output$pie_message <- renderText({
+        data <- sample() %>%
+            group_by(interest) %>%
+            summarise(observation = n())
+        if(nrow(data) == 0) {
+            paste0("There are not enough data")
+        } else if(nrow(data) == 1) {
+            if(data[1,1] == "Like") {
+                paste0("People like you enjoy listening music")
+            } else {
+                paste0("People like you do not enjoy listening music")
+            }
+        } else if (data[1,2] < data[2,2]) {
+            paste0("You are more likely enjoying listening music")
+        } else {
+            paste0("You are less likely enjoying listening music")
+        }
     })
     
     
@@ -60,7 +81,7 @@ shinyServer(function(input, output) {
         
         final_df <- data.frame(genres, values)
         
-        ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity')
+        ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1")
     })
     
     output$gender <- renderUI({

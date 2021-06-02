@@ -26,7 +26,8 @@ second_page <- tabPanel(
         # Show a plot of the generated distribution
         mainPanel(
             plotOutput("music_pie"),
-            plotOutput("genre_bar")
+            plotOutput("genre_bar"),
+            textOutput("pie_message")
         )
     )
 )
