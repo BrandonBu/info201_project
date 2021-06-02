@@ -7,10 +7,10 @@ first_page <- tabPanel(
         mainPanel(
             tags$img(src = "Logo.jpg", height = 100, width = 100), 
             h3("App Introduction"), 
-            tags$p("This application help visualize the data of different factors that 
-                   could possibly have correlation with the choice of various genre of music. "),
+            tags$p("This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music. These include: gender, education level, and time spends on internet everyday. In the second page, Table & Plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
             tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!")
-        )
+        ),
+    "Group Member Discussion"
 )
 
 second_page <- tabPanel(
@@ -39,15 +39,21 @@ second_page <- tabPanel(
 )
 
 third_page <- tabPanel(
-    "Summary",
-        mainPanel(
-            h3("Summary"),
-        )
+    "Plot",
+      
     
+)
+
+fourth_page <- tabPanel(
+    "Summary",
+    mainPanel(
+        h3("Summary"),
+    )
 )
 
 ui <- navbarPage(title = span("Music Recommendation", style = "default_bg: #DEEBF7; color: black"),
     first_page,
     second_page,
-    third_page
+    third_page,
+    fourth_page
 )
