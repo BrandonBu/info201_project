@@ -102,33 +102,4 @@ shinyServer(function(input, output) {
                     selected = "few hours a day")
     })
     
-    output$music_pie <- renderPlot({
-        data <- sample() %>%
-            group_by(interest) %>%
-            summarise(observation = n())
-        ggplot(data, aes(x = "", y = observation, fill = interest)) +
-            geom_bar(stat='identity', width = 1) + 
-            coord_polar("y", start=0) +
-            theme_void()
-    })
-    
-    output$gender <- renderUI({
-        radioButtons("gender", label = "Gender",
-                     choices = list("male", "female"),
-                     selected = "male")
-    })
-    
-    output$education <- renderUI({
-        selectInput("Education", label = "What is your Education level",
-                    choices = as.list(unique(music$Education)),
-                    selected = "secondary school")
-    })
-    
-    output$internet <- renderUI({
-        selectInput("Internet", label = "How long do you spend on internet",
-                    choices = as.list(unique(music$Internet.usage)),
-                    selected = "few hours a day")
-    })
-    
-    
 })
