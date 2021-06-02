@@ -101,12 +101,8 @@ shinyServer(function(input, output) {
                     choices = as.list(unique(music$Internet.usage)),
                     selected = "few hours a day")
     })
-    
-    shinyServer(function(input, output) {
         
-        output$table <- DT::renderDataTable(DT::datatable({
-            rawData <- read.csv("data/responses.csv")
-            data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
+    output$table <- DT::renderDataTable(DT::datatable({
             if (input$age != "All") {
                 data <- data[data$Age == input$age,]
             }
@@ -127,37 +123,4 @@ shinyServer(function(input, output) {
         
     })
     
-    fluidRow(
-        column(4,
-               selectInput("age",
-                           "Age:",
-                           c("All",
-                             unique(as.character(data$Age))))
-        ),
-        column(4,
-               selectInput("gender",
-                           "Gender:",
-                           c("All",
-                             unique(as.character(data$Gender))))
-        ),
-        column(4,
-               selectInput("speed",
-                           "Tempo preference(1-5):",
-                           c("All",
-                             unique(as.character(data$Slow.songs.or.fast.songs))))
-        ),
-        column(4,
-               selectInput("internet",
-                           "Hours spend on internet:",
-                           c("All",
-                             unique(as.character(data$Internet.usage))))
-        ),
-        column(4,
-               selectInput("education",
-                           "Education level:",
-                           c("All",
-                             unique(as.character(data$Education))))
-        )
-    )
-    DT::dataTableOutput("table")
-})
+
