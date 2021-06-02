@@ -38,8 +38,41 @@ second_page <- tabPanel(
 
 third_page <- tabPanel(
     "Table",
-    mainPanel(
-      tableOutput("table")
+    fluidRow(
+      column(4,
+             selectInput("age",
+                         "Age:",
+                         c("All",
+                           unique(as.character(data$Age))))
+      ),
+      column(4,
+             selectInput("gender",
+                         "Gender:",
+                         c("All",
+                           unique(as.character(data$Gender))))
+      ),
+      column(4,
+             selectInput("speed",
+                         "Tempo preference(1-5):",
+                         c("All",
+                           unique(as.character(data$Slow.songs.or.fast.songs))))
+      ),
+      column(4,
+             selectInput("internet",
+                         "Hours spend on internet:",
+                         c("All",
+                           unique(as.character(data$Internet.usage))))
+      ),
+      column(4,
+             selectInput("education",
+                         "Education level:",
+                         c("All",
+                           unique(as.character(data$Education))))
+      )
+    ),
+    DT::dataTableOutput("table"),
+      mainPanel(
+        tableOutput("table")
     )
 )
 
