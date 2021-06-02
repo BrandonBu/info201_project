@@ -20,9 +20,9 @@ second_page <- tabPanel(
   "Plot",
   sidebarLayout(
     sidebarPanel(
-      uiOutput("gender"),
-      uiOutput("education"),
-      uiOutput("internet")
+      uiOutput("Gender"),
+      uiOutput("Education"),
+      uiOutput("Internet")
     ),
     
     # Show a plot of the generated distribution
