@@ -86,17 +86,20 @@ third_page <- tabPanel(
                          unique(as.character(data$Education))))
     )
   ),
-  DT::dataTableOutput("table")
+  textOutput("table_description"),
+  DT::dataTableOutput("table"),
 )
 
 fourth_page <- tabPanel(
   "Summary",
   mainPanel(
-    h3("Summary")
+    tags$img(src = "summary1.png", height = 400, width = 1200), 
+    tags$img(src = "summary2.png", height = 400, width = 1200), 
+    h4("According to the results from our table, we realized that regardless of the gender and internet usage, college students like rock music the most.")
   )
 )
 
-ui <- navbarPage(title = span("Music Recommendation", style = "default_bg: #DEEBF7; color: black"),
+ui <- navbarPage(title = span("Music Preference Analysis", style = "default_bg: #DEEBF7; color: black"),
                  first_page,
                  second_page,
                  third_page,
