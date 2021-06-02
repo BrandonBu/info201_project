@@ -101,26 +101,26 @@ shinyServer(function(input, output) {
                     choices = as.list(unique(music$Internet.usage)),
                     selected = "few hours a day")
     })
-        
-    output$table <- DT::renderDataTable(DT::datatable({
-            if (input$age != "All") {
-                data <- data[data$Age == input$age,]
-            }
-            if (input$gender != "All") {
-                data <- data[data$Gender == input$gender,]
-            }
-            if (input$speed != "All") {
-                data <- data[data$Slow.songs.or.fast.songs == input$speed,]
-            }
-            if (input$internet != "All") {
-                data <- data[data$Internet.usage == input$internet,]
-            }
-            if (input$education != "All") {
-                data <- data[data$Education == input$education,]
-            }
-            data
-        }))
-        
-    })
     
-
+    
+    output$table <- DT::renderDataTable(DT::datatable({
+        rawData <- read.csv("data/responses.csv")
+        table_data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
+        if (input$age != "All") {
+            table_data <- table_data[table_data$Age == input$age,]
+        }
+        if (input$gender != "All") {
+            table_data <- table_data[table_data$Gender == input$gender,]
+        }
+        if (input$speed != "All") {
+            table_data <- table_data[table_data$Slow.songs.or.fast.songs == input$speed,]
+        }
+        if (input$internet != "All") {
+            table_data <- table_data[table_data$Internet.usage == input$internet,]
+        }
+        if (input$education != "All") {
+            table_data <- table_data[table_data$Education == input$education,]
+        }
+        table_data
+    }))
+})
