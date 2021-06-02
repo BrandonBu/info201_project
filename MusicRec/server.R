@@ -28,6 +28,13 @@ shinyServer(function(input, output) {
         }
     })
     
+    output$pie_description <- renderText({
+        paste0("This is a pie chart that will tell you how people with the similar demograpic to you enjoy listening to music. 
+               People choose 5 in music means they enjoy very much. If there are more people like music, then we say you are
+               more likely to enjoy music.
+               If you are master or currently primary, it is probable that there is not enough data to get the trend")
+    })
+    
     output$pie_message <- renderText({
         data <- sample() %>%
             group_by(interest) %>%
@@ -100,6 +107,13 @@ shinyServer(function(input, output) {
         selectInput("Internet", label = "How long do you spend on internet",
                     choices = as.list(unique(music$Internet.usage)),
                     selected = "few hours a day")
+    })
+    
+    output$table_description <- renderText({
+        paste0("The dataset contains the music preference of a group of people whose age between 15 - 30. 
+          They rated 12 different music generals with their opinions; 1 stands for 'don't enjoy at all'
+          and 5 stands for 'enjoy very much'. With the table, users can visualize the data for specific
+          ages, genders, tempo preferences, hours spend on the internet, and education levels.")
     })
     
     
