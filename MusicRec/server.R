@@ -102,4 +102,62 @@ shinyServer(function(input, output) {
                     selected = "few hours a day")
     })
     
+    shinyServer(function(input, output) {
+        
+        output$table <- DT::renderDataTable(DT::datatable({
+            rawData <- read.csv("data/responses.csv")
+            data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
+            if (input$age != "All") {
+                data <- data[data$Age == input$age,]
+            }
+            if (input$gender != "All") {
+                data <- data[data$Gender == input$gender,]
+            }
+            if (input$speed != "All") {
+                data <- data[data$Slow.songs.or.fast.songs == input$speed,]
+            }
+            if (input$internet != "All") {
+                data <- data[data$Internet.usage == input$internet,]
+            }
+            if (input$education != "All") {
+                data <- data[data$Education == input$education,]
+            }
+            data
+        }))
+        
+    })
+    
+    fluidRow(
+        column(4,
+               selectInput("age",
+                           "Age:",
+                           c("All",
+                             unique(as.character(data$Age))))
+        ),
+        column(4,
+               selectInput("gender",
+                           "Gender:",
+                           c("All",
+                             unique(as.character(data$Gender))))
+        ),
+        column(4,
+               selectInput("speed",
+                           "Tempo preference(1-5):",
+                           c("All",
+                             unique(as.character(data$Slow.songs.or.fast.songs))))
+        ),
+        column(4,
+               selectInput("internet",
+                           "Hours spend on internet:",
+                           c("All",
+                             unique(as.character(data$Internet.usage))))
+        ),
+        column(4,
+               selectInput("education",
+                           "Education level:",
+                           c("All",
+                             unique(as.character(data$Education))))
+        )
+    )
+    DT::dataTableOutput("table")
 })
