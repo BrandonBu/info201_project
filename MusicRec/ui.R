@@ -13,7 +13,16 @@ first_page <- tabPanel(
     tags$img(src = "Logo.jpg", height = 100, width = 100), 
     h3("App Introduction"), 
     tags$p("This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music. These include: gender, education level, and time spends on internet everyday. In the second page, Table & Plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
-    tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!")
+    tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!"),
+    h3("Group Member Description"),
+    h5("Brandon Bu"),
+    tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Dancing with your ghost"),
+    h5("Mina Gao"),
+    tags$p("Female, Education Level: college, Internet usage: most of the day, Favorite song: Good Day - Surfaces"),
+    h5("Zihan Lin"),
+    tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Leave the door open (Jazz, pop)"),
+    h5("Vivian Yu"),
+    tags$p("Female, Education Level: college, Internet usage: most of the day, Favorite song: 2002, If I can't have you, 10000 hours... (basically pop songs, bossa nova, Jazz)"),
   )
 )
 
@@ -21,9 +30,9 @@ second_page <- tabPanel(
   "Plot",
   sidebarLayout(
     sidebarPanel(
-      uiOutput("gender"),
-      uiOutput("education"),
-      uiOutput("internet")
+      uiOutput("Gender"),
+      uiOutput("Education"),
+      uiOutput("Internet")
     ),
     
     # Show a plot of the generated distribution

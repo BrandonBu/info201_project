@@ -11,7 +11,7 @@ shinyServer(function(input, output) {
     
     sample <- reactive({
         music %>%
-            filter(Gender %in% input$gender) %>%
+            filter(Gender %in% input$Gender) %>%
             filter(Education %in% input$Education) %>%
             filter(Internet.usage %in% input$Internet)
     })
@@ -84,19 +84,19 @@ shinyServer(function(input, output) {
         ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1")
     })
     
-    output$gender <- renderUI({
-        radioButtons("gender", label = "Gender",
+    output$Gender <- renderUI({
+        radioButtons("Gender", label = "Gender",
                      choices = list("male", "female"),
                      selected = "male")
     })
     
-    output$education <- renderUI({
+    output$Education <- renderUI({
         selectInput("Education", label = "What is your Education level",
                     choices = as.list(unique(music$Education)),
                     selected = "secondary school")
     })
     
-    output$internet <- renderUI({
+    output$Internet <- renderUI({
         selectInput("Internet", label = "How long do you spend on internet",
                     choices = as.list(unique(music$Internet.usage)),
                     selected = "few hours a day")
