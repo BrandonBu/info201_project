@@ -16,27 +16,32 @@ first_page <- tabPanel(
 )
 
 second_page <- tabPanel(
-    "Table",
-    sidebarLayout(
-        sidebarPanel(
-            uiOutput("gender"),
-            uiOutput("education"),
-            uiOutput("internet")
-        ),
-        
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("music_pie"),
-            plotOutput("genre_bar"),
-            textOutput("pie_message")
-        )
+  "Plot",
+  sidebarLayout(
+    sidebarPanel(
+      uiOutput("gender"),
+      uiOutput("education"),
+      uiOutput("internet")
+    ),
+    
+    # Show a plot of the generated distribution
+    mainPanel(
+      tabsetPanel(
+        tabPanel("Genre analysis",
+                 plotOutput("genre_bar")),
+        tabPanel("Pie",
+                 plotOutput("music_pie"),
+                 textOutput("pie_message"))
+      )
     )
+  )
 )
 
 third_page <- tabPanel(
-    "Plot",
-      
-    
+    "Table",
+    mainPanel(
+      tableOutput("table")
+    )
 )
 
 fourth_page <- tabPanel(
