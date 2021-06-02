@@ -86,7 +86,7 @@ shinyServer(function(input, output) {
     
     output$gender <- renderUI({
         radioButtons("gender", label = "Gender",
-                     choices = as.list(unique(music$Gender)),
+                     choices = list("male", "female"),
                      selected = "male")
     })
     
