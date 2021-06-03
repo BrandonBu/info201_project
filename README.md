@@ -23,4 +23,4 @@ The second plot page (_"Male/Female Interest towards Genres"_) analyzes the **in
 The table page shows some important columns of the dataset. There are some selection box that allows users to observe the specific ages, genders, tempo preferences, hours spend on the internet, and education levels.
 
 # Shiny app
-The link to the shiny hosted application is: 
+The link to the shiny hosted application is: https://zihanlin112000.shinyapps.io/MusicRec/
