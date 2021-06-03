@@ -171,6 +171,13 @@ shinyServer(function(input, output) {
                   axis.title.y = element_text(size= 14))
     })
     
+    output$genre_line_description <- renderText({
+        paste0("This is a line graph that will tell you what music genre people with the selected demograpic will enjoy listening to. 
+               People indicate their interest in each genre based on a 1-5 scale, a interest value of 5 means they enjoy the genre very much.
+               Genres with the highest sum up interest values can potentially be your favorite genres as well.
+               If you are master or currently primary, or if you don't spend any time on internet, it is probable that there is not enough data for the graph.")
+    })
+    
     output$genre_line <- renderPlot({
         male_data <- sample2() 
         

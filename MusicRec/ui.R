@@ -87,6 +87,7 @@ third_page <-
   ),
   # Show a plot of the generated distribution
   mainPanel(
+    textOutput("genre_line_description"),
     plotOutput("genre_line")
   )
 )
