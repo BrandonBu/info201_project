@@ -89,11 +89,22 @@ shinyServer(function(input, output) {
         return(final_df)
     }
     
+    output$genre_description <- renderText({
+        paste0("This is a bar chart that will tell you what music genre people with the selected demograpic will enjoy listening to. 
+               People indicate their interest in each genre based on a 1-5 scale, a interest value of 5 means they enjoy the genre very much.
+               Genres with the highest sum up interest values can potentially be your favorite genres as well.
+               If you are master or currently primary, or if you don't spend any time on internet, it is probable that there is not enough data for the graph.")
+    })
     
     output$genre_bar <- renderPlot({
         data <- sample()
         final_df <- bar.data.process(data)
-        ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1")
+        ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1") + 
+            ggtitle("Number of Sightings in Different Shapes in US/CA") + 
+            ylab("interest values") +
+            theme(plot.title = element_text(size = 20, face = "bold"),
+                axis.title.x = element_text(size= 14),
+                axis.title.y = element_text(size= 14))
     })
     
     output$bar_message <- renderText({
@@ -106,9 +117,11 @@ shinyServer(function(input, output) {
             paste0("There are not enough data")
         } else {
             result <- bm_data[1,1]
-            paste0("You are more likely enjoying listening to ", result)
+            paste0("You are more likely enjoying listening to <b>", result, "</b>")
         }
     })
+    
+    output 
     
     output$Gender <- renderUI({
         radioButtons("Gender", label = "Gender",
