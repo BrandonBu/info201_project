@@ -54,8 +54,7 @@ shinyServer(function(input, output) {
         }
     })
     
-    
-    output$genre_bar <- renderPlot({
+    bar.data.process <- function(data) {
         genre_data <- sample()
         
         dance <- genre_data$Dance
@@ -87,8 +86,28 @@ shinyServer(function(input, output) {
                     sum(df$techno, na.rm = T), sum(df$opera, na.rm = T))
         
         final_df <- data.frame(genres, values)
-        
+        return(final_df)
+    }
+    
+    
+    output$genre_bar <- renderPlot({
+        data <- sample()
+        final_df <- bar.data.process(data)
         ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1")
+    })
+    
+    output$bar_message <- renderText({
+        data <- sample()
+        final_df <- bar.data.process(data)
+        bm_data = final_df %>%
+            filter(values == max(values))
+        
+        if(bm_data[1,2] == 0) {
+            paste0("There are not enough data")
+        } else {
+            result <- bm_data[1,1]
+            paste0("You are more likely enjoying listening to ", result)
+        }
     })
     
     output$Gender <- renderUI({

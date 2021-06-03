@@ -40,7 +40,8 @@ second_page <- tabPanel(
     mainPanel(
       tabsetPanel(
         tabPanel("Genre analysis",
-                 plotOutput("genre_bar")),
+                 plotOutput("genre_bar"),
+                 textOutput("bar_message")),
         tabPanel("Pie",
                  textOutput("pie_description"),
                  plotOutput("music_pie"),
