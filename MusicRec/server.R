@@ -7,6 +7,8 @@ music <- read.csv("data/responses.csv", stringsAsFactors=FALSE)
 
 # Define server logic required to draw a histogram
 shinyServer(function(input, output) {
+    music <- music %>%
+        filter(!is.na(Music))
     music$interest <- ifelse(music$Music == 5, "Like", "Dislike")
     
     sample <- reactive({
@@ -99,8 +101,17 @@ shinyServer(function(input, output) {
     output$genre_bar <- renderPlot({
         data <- sample()
         final_df <- bar.data.process(data)
-        ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1") + 
+        
+        bm_data = final_df %>%
+            filter(values == max(values))
+        
+        high_value <- bm_data[1,2]
+        
+        final_df <- final_df %>% mutate( ToHighlight = ifelse( values == high_value, "yes", "no" ) )
+        
+        ggplot(final_df, aes(x = genres, y = values, fill = ToHighlight)) + geom_bar(stat='identity') + 
             ggtitle("People with Similar Demographics Like You Are More Likely to Like...") + 
+            scale_fill_manual( values = c( "yes"="blue1", "no"="orange1" ), guide = FALSE ) +
             ylab("interest values") +
             theme(plot.title = element_text(size = 20, face = "bold"),
                 axis.title.x = element_text(size= 14),
@@ -123,8 +134,17 @@ shinyServer(function(input, output) {
     
     output$summary_graph <- renderPlot({
         data <- bar.data.process(music)
-        ggplot(data, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1") + 
+        
+        bm_data = data %>%
+            filter(values == max(values))
+        
+        high_value <- bm_data[1,2]
+        
+        data <- data %>% mutate( ToHighlight = ifelse( values == high_value, "yes", "no" ) )
+        
+        ggplot(data, aes(x = genres, y = values, fill = ToHighlight)) + geom_bar(stat='identity') + 
             ggtitle("People Surveyed Are More Likely to Like...") + 
+            scale_fill_manual( values = c( "yes"="blue1", "no"="orange1" ), guide = FALSE ) +
             ylab("interest values") +
             theme(plot.title = element_text(size = 20, face = "bold"),
                   axis.title.x = element_text(size= 14),
