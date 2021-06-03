@@ -124,10 +124,13 @@ shinyServer(function(input, output) {
         bm_data = final_df %>%
             filter(values == max(values))
         
+        row <- nrow(bm_data)
+        
         if(bm_data[1,2] == 0) {
             paste0("There are not enough data")
         } else {
-            result <- bm_data[1,1]
+            result <- bm_data[,1]
+            result <- paste(result, collapse=', ')
             paste0("You are more likely enjoying listening to <b>", result, "</b>")
         }
     })
