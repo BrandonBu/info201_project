@@ -3,14 +3,19 @@ library(dplyr)
 library(ggplot2)
 library(reshape2)
 
+# read the dataset 
 music <- read.csv("data/responses.csv", stringsAsFactors=FALSE)
 
-# Define server logic required to draw a histogram
+# Define server logic required to draw
 shinyServer(function(input, output) {
+    # take away the na row for Music column
     music <- music %>%
         filter(!is.na(Music))
+    # add a new column interest used for the pie chart
+    # if Music = 5, it means like music, otherwise dislike
     music$interest <- ifelse(music$Music == 5, "Like", "Dislike")
     
+    # get the data from the selected gender, education level, and internet usage
     sample <- reactive({
         music %>%
             filter(Gender %in% input$Gender) %>%
@@ -18,6 +23,7 @@ shinyServer(function(input, output) {
             filter(Internet.usage %in% input$Internet)
     })
     
+    # get the data of male for age and the average interest level of all music type
     sample2 <- reactive({
         music %>%
             filter(Gender == "male") %>%
@@ -26,6 +32,7 @@ shinyServer(function(input, output) {
             summarise(mean = mean(get(input$Genre)))
     })
     
+    # get the data of female for age and the average interest level of all music type
     sample3 <- reactive({
         music %>%
             filter(Gender == "female") %>%
@@ -34,6 +41,8 @@ shinyServer(function(input, output) {
             summarise(mean = mean(get(input$Genre)))
     })
     
+    # plot the pie chart in the test genre page including peole like and dislike music
+    # this plot will show you how people with similar demographics like you enjoy music
     output$music_pie <- renderPlot({
         data <- sample() %>%
             group_by(interest) %>%
@@ -47,6 +56,7 @@ shinyServer(function(input, output) {
         }
     })
     
+    # print the description of the pie chart
     output$pie_description <- renderText({
         paste0("This is a pie chart that will tell you how people with the similar demograpic to you enjoy listening to music. 
                People choose 5 in music means they enjoy very much. If there are more people like music, then we say you are
@@ -54,6 +64,7 @@ shinyServer(function(input, output) {
                If you are master or currently primary, it is probable that there is not enough data to get the trend")
     })
     
+    # print the one-sentence analysis of the pie chart
     output$pie_message <- renderText({
         data <- sample() %>%
             group_by(interest) %>%
@@ -73,6 +84,7 @@ shinyServer(function(input, output) {
         }
     })
     
+    # function that have an input data and process the input data 
     bar.data.process <- function(data) {
         genre_data <- data
         
@@ -108,6 +120,7 @@ shinyServer(function(input, output) {
         return(final_df)
     }
     
+    # print the description of the genre bar graph
     output$genre_description <- renderText({
         paste0("This is a bar chart that will tell you what music genre people with the selected demograpic will enjoy listening to. 
                People indicate their interest in each genre based on a 1-5 scale, a interest value of 5 means they enjoy the genre very much.
@@ -115,6 +128,9 @@ shinyServer(function(input, output) {
                If you are master or currently primary, or if you don't spend any time on internet, it is probable that there is not enough data for the graph.")
     })
     
+    # plot the bar graph about the genre type analysis
+    # this plot shows how people with similar demographics like you like music types
+    # The highlights bar is the music type that most popular for the group of people
     output$genre_bar <- renderPlot({
         data <- sample()
         final_df <- bar.data.process(data)
@@ -135,6 +151,7 @@ shinyServer(function(input, output) {
                 axis.title.y = element_text(size= 14))
     })
     
+    # print the analysis of bar graph
     output$bar_message <- renderText({
         data <- sample()
         final_df <- bar.data.process(data)
@@ -152,6 +169,8 @@ shinyServer(function(input, output) {
         }
     })
     
+    # plot the summary bar graph on the summary page
+    # show the overall music preferance of the dataset
     output$summary_graph <- renderPlot({
         data <- bar.data.process(music)
         
@@ -171,13 +190,17 @@ shinyServer(function(input, output) {
                   axis.title.y = element_text(size= 14))
     })
     
+    # print the description of the genre line plot
     output$genre_line_description <- renderText({
-        paste0("This is a line graph that will tell you what music genre people with the selected demograpic will enjoy listening to. 
-               People indicate their interest in each genre based on a 1-5 scale, a interest value of 5 means they enjoy the genre very much.
-               Genres with the highest sum up interest values can potentially be your favorite genres as well.
-               If you are master or currently primary, or if you don't spend any time on internet, it is probable that there is not enough data for the graph.")
+        paste0("This is a line graph that will tell you how male (indicated by blue line) and female (indicated by red line) have 
+        demonstrated interest over a selected music genre as their ages increase. People indicate their interest in each genre 
+        based on a 1-5 scale, an interest value of 5 means they enjoy the genre very much. Due to a large amount of sample has age gathered 
+        around the age of 20, we calculated mean interest value instead of summing the values to be as subjective as possible. Both genders’ 
+        interest trend in the selected genre are indicated by the follow:")
     })
     
+    # plot the genre line chart
+    # shows the male and female interest in different genres as age changes
     output$genre_line <- renderPlot({
         male_data <- sample2() 
         
@@ -193,6 +216,7 @@ shinyServer(function(input, output) {
                   axis.title.y = element_text(size= 14))
     })
     
+    # allow users to choose the music Genre in the line chart page
     output$Genre <- renderUI({
         radioButtons("Genre", label = "Genre",
                      choices = list("Dance", "Folk", "Country", "Classical.music", "Musical", "Pop", "Rock", "Metal.or.Hardrock", "Punk", "Hiphop..Rap", "Reggae..Ska", "Swing..Jazz",
@@ -200,24 +224,28 @@ shinyServer(function(input, output) {
                      selected = "Rock")
     })
     
+    # allow users to choose gender in test genre page
     output$Gender <- renderUI({
         radioButtons("Gender", label = "Gender",
                      choices = list("male", "female"),
                      selected = "male")
     })
     
+    # allow users to choose education level in test genre page
     output$Education <- renderUI({
         selectInput("Education", label = "What is your Education level",
                     choices = as.list(unique(music$Education)),
                     selected = "secondary school")
     })
     
+    # allow users to choose internet usage in test genre page
     output$Internet <- renderUI({
         selectInput("Internet", label = "How long do you spend on internet",
                     choices = as.list(unique(music$Internet.usage)),
                     selected = "few hours a day")
     })
     
+    # print the description of the tale of dataset
     output$table_description <- renderText({
         paste0("The dataset contains the music preference of a group of people whose age between 15 - 30. 
           They rated 12 different music generals with their opinions; 1 stands for 'don't enjoy at all'
@@ -225,7 +253,7 @@ shinyServer(function(input, output) {
           ages, genders, tempo preferences, hours spend on the internet, and education levels.")
     })
     
-    
+    # shows the dataset
     output$table <- DT::renderDataTable(DT::datatable({
         rawData <- read.csv("data/responses.csv")
         table_data <- select(rawData, 141, 145, 2, 133, 147, (3:19))

@@ -143,13 +143,13 @@ fifth_page <- tabPanel(
        listening classical music. Furthermore, as the pie chart shows, no matter how we filter the sample, we noticed that
        most of the participants enjoy listening to music."),
     h3("Data quality"),
-    tags$p("As for our data quality, the sample size of our data is about 1000 and about 150 columns contains different 
-           information, like music type and demographics. It contains reasonable high quality information and there are 
-           only a few missing data . However, there are some bias because the data is collected from young people in Slovakian. 
-           These bias of age and locations would means “rock” may not be the most popular music type in other region or at other 
-           ages. In addition, gender column only includes male and female. This mould exclude some people from the participants. 
-           Since the participants are friends invited from students of Stats class in FSEV UK, these students are more likely 
-           to invite friends who have a similar music preference. This could also cause a bias."),
+    tags$p("As for our data quality, the sample size of our data is about 1000 and about 150 columns contains different information, 
+           like music type and demographics. It contains reasonable high quality information and there are only a few missing data. 
+           However, there are some bias because the data is collected from young people in Slovakian so the results could be based on 
+           their cultures, backgrounds, and trends. These bias of age and locations would means “rock” may not be the most popular music 
+           type in other region or at other ages. In addition, gender column only includes male and female. This mould exclude some people 
+           from the participants. Since the participants are friends invited from students of Stats class in FSEV UK, these students are more 
+           likely to invite friends who have a similar music preference. This could also cause a bias."),
     h3("Future ideas"),
     tags$p("Besides the factors like gender, education level, and internet usage, there are more interesting
        factors collected from the dataset that could be implemented into our visualization to show the users
