@@ -18,6 +18,22 @@ shinyServer(function(input, output) {
             filter(Internet.usage %in% input$Internet)
     })
     
+    sample2 <- reactive({
+        music %>%
+            filter(Gender == "male") %>%
+            filter(!is.na(Age), !is.na(get(input$Genre))) %>%
+            group_by(Age) %>%
+            summarise(mean = mean(get(input$Genre)))
+    })
+    
+    sample3 <- reactive({
+        music %>%
+            filter(Gender == "female") %>%
+            filter(!is.na(Age), !is.na(get(input$Genre))) %>%
+            group_by(Age) %>%
+            summarise(mean = mean(get(input$Genre)))
+    })
+    
     output$music_pie <- renderPlot({
         data <- sample() %>%
             group_by(interest) %>%
@@ -152,6 +168,23 @@ shinyServer(function(input, output) {
             theme(plot.title = element_text(size = 20, face = "bold"),
                   axis.title.x = element_text(size= 14),
                   axis.title.y = element_text(size= 14))
+    })
+    
+    output$genre_line <- renderPlot({
+        male_data <- sample2() 
+        
+        female_data <- sample3()
+        
+        ggplot() + 
+            geom_line(data = male_data, aes(x = Age, y = mean), color = "darkred") + 
+            geom_line(data = female_data, aes(x = Age, y = mean), color="steelblue")
+    })
+    
+    output$Genre <- renderUI({
+        radioButtons("Genre", label = "Genre",
+                     choices = list("Dance", "Folk", "Country", "Classical.music", "Musical", "Pop", "Rock", "Metal.or.Hardrock", "Punk", "Hiphop..Rap", "Reggae..Ska", "Swing..Jazz",
+                                    "Rock.n.roll", "Alternative", "Latino", "Techno..Trance", "Opera"),
+                     selected = "Rock")
     })
     
     output$Gender <- renderUI({

@@ -1,0 +1,59 @@
+
+* {
+  font-family: 'Comic Sans MS', cursive !important;
+}
+
+/*Colour hyperlinks*/
+a {
+  color: ##4682b4;
+}
+
+a:hover {
+  color: #858B8E;
+}
+
+/*Colour of nav bar Title*/
+.navbar-default .navbar-brand{
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+
+li {
+  float: left;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+  background-color: white;
+}
+
+
+
+/*Colour of nav bar tabs when hovering and active*/
+.navbar-default .navbar-nav > .active > a, 
+                           .navbar-default .navbar-nav > .active > a:focus, 
+                           .navbar-default .navbar-nav > .active > a:hover {
+                                color: ##4682b4;
+                            }

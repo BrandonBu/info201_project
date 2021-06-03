@@ -8,24 +8,43 @@ rawData <- read.csv("data/responses.csv")
 data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
 
 first_page <- tabPanel(
-  "About us",
+  "Project Overview", includeCSS("style.css"),
   mainPanel(
-    tags$div(img(src = "Logo.jpg", height = 100, width = 100), h1("App Introduction", style = "display: inline")), 
-    tags$p("This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music. These include: gender, education level, and time spends on internet everyday. In the second page, Table & Plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
+    tags$img(src = "Logo.jpg", height = 200, width = 200), h1("App Introduction", style = "display: inline"),
+    h3("Things we want our audience to explore:"), 
+    tags$p("Our application helps visualize the relationships between different data factors and the choice of various genres of music. The possible data factors that might correlate with the genres of music are: age, gender, education level, and time spent on the internet every day. For table & plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
     tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!"),
-    h3("Group Member Description"),
-    tags$img(src = "song1.png", height = 200, width = 150), 
-    h5("Brandon Bu"), 
-    p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Dancing with your ghost"),
-    tags$img(src = "song2.png", height = 200, width = 150),
-    h5("Mina Gao"),
+    
+    h3("About the data:"), 
+    tags$p("The dataset we have been working on is a survey intended to explore the music preferences and opinions of young people in Slovakia. All participants were of Slovakian nationality, aged between 15-30. (* the data contains a few missing values)"),
+    
+    h3("Variables in the dataset:"), 
+    tags$div(tags$b("DEMOGRAPHICS"), tags$br(), "Age", tags$br(), "Gender: Female / Male", tags$br(), "Education: highest education achieved", tags$br(), "Currently a Primary school pupil / Primary school / Secondary school / College or Bachelor degree"),
+    tags$br(),
+    tags$div(tags$b("PERSONALITY TRAITS, VIEWS ON LIFE & OPINIONS"), tags$br(), "Internet.usage: time spent online per day", tags$br(), "No time at all / Less than an hour a day / Few hours a day / Most of the day"),
+    tags$br(),
+    tags$div(tags$b("MUSIC PREFERENCES"), tags$br(), "Slow.songs.or.fast.songs: prefer slow paced music 1; perfer fast paced music 5 (rated with 1-5)", tags$br(), "Preferences on 12 different genres of music, rated between score 1 - 5 (integer). Score 1 stands for 'don't enjoy at all'; 5 stands for 'enjoy very much'", 
+             tags$br(), "Dance, Disco, Funk music", tags$br(), "Folk", tags$br(), "Country", tags$br(), "Classical", tags$br(), "Musicals", tags$br(), "Pop", tags$br(), "Rock", tags$br(), "Metal, Hard rock", tags$br(), "Punk", tags$br(), "Hip hop, Rap", tags$br(), "Reggae, Ska", tags$br(), "Swing, Jazz", tags$br(), "Rock n Roll",
+             tags$br(), "Alternative music", tags$br(), "Latin", tags$br(), "Techno, Trance", tags$br(), "Opera"),
+  )
+)
+
+sixth_page <- tabPanel(
+  "About Us",
+  mainPanel(
+    h3("Group Members"),
+    h4("Brandon Bu"),
+    tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Dancing with your ghost"),
+    tags$img(src = "song1.png", height = 200, width = 150),
+    h4("Mina Gao"),
     tags$p("Female, Education Level: college, Internet usage: most of the day, Favorite song: Good Day - Surfaces"),
-    tags$img(src = "song3.png", height = 200, width = 150),
-    h5("Zihan Lin"),
+    tags$img(src = "song2.png", height = 200, width = 150),
+    h4("Zihan Lin"),
     tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Leave the door open (Jazz, pop)"),
-    tags$img(src = "song4.png", height = 200, width = 150),
-    h5("Vivian Yu"),
+    tags$img(src = "song3.png", height = 200, width = 150),
+    h4("Vivian Yu"),
     tags$p("Female, Education Level: college, Internet usage: most of the day, Favorite song: 2002, If I can't have you, 10000 hours... (basically pop songs, bossa nova, Jazz)"),
+    tags$img(src = "song4.png", height = 200, width = 150),
   )
 )
 
@@ -54,7 +73,22 @@ second_page <- tabPanel(
   )
 )
 
-third_page <- tabPanel(
+third_page <- 
+  tabPanel(
+  "Line plot",
+  sidebarLayout(
+  sidebarPanel(
+    uiOutput("Genre")
+  ),
+  # Show a plot of the generated distribution
+  mainPanel(
+    plotOutput("genre_line")
+  )
+)
+)
+
+
+fourth_page <- tabPanel(
   "Table",
   fluidRow(
     column(4,
@@ -92,7 +126,7 @@ third_page <- tabPanel(
   DT::dataTableOutput("table"),
 )
 
-fourth_page <- tabPanel(
+fifth_page <- tabPanel(
   "Summary",
   mainPanel(
     plotOutput("summary_graph"),
@@ -105,5 +139,7 @@ ui <- navbarPage(title = span("Music Preference Analysis", style = "default_bg: 
                  first_page,
                  second_page,
                  third_page,
-                 fourth_page
+                 fourth_page,
+                 fifth_page,
+                 sixth_page
 )
