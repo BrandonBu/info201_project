@@ -136,8 +136,26 @@ fifth_page <- tabPanel(
   "Summary",
   mainPanel(
     plotOutput("summary_graph"),
-    h6("According to the results from our table, we realized that regardless of the gender and internet usage, college students like rock music the most. As for our data quality, 
-      the sample size of our data is about 1000 and that there are only a few missing data. However, there are some bias because the gender column only includes females and males.")
+    h3("Broader implications of the insights"),
+    tags$p("According to the results from our table, we realized that regardless of the gender and internet usage, 
+       college students like rock music the most. Additionally, at the age of 25, there is a large difference in gender of
+       listening classical music. Furthermore, as the pie chart shows, no matter how we filter the sample, we noticed that
+       most of the participants enjoy listening to music."),
+    h3("Data quality"),
+    tags$p("As for our data quality, the sample size of our data is about 1000 and about 150 columns contains different 
+           information, like music type and demographics. It contains reasonable high quality information and there are 
+           only a few missing data . However, there are some bias because the data is collected from young people in Slovakian. 
+           These bias of age and locations would means “rock” may not be the most popular music type in other region or at other 
+           ages. In addition, gender column only includes male and female. This mould exclude some people from the participants. 
+           Since the participants are friends invited from students of Stats class in FSEV UK, these students are more likely 
+           to invite friends who have a similar music preference. This could also cause a bias."),
+    h3("Future ideas"),
+    tags$p("Besides the factors like gender, education level, and internet usage, there are more interesting
+       factors collected from the dataset that could be implemented into our visualization to show the users
+       what other factors that could have correlation with the music tastes. These include: whether one has cheated in school,
+       whether one has siblings, or how often they drink etc. The detailed information we consider, the more features we 
+       could provide to the users. We would like to advance our project by offering users the name of the songs they might like
+       when they input their personal information in our 'Test Your Genre' feature."),
   )
 )
 
