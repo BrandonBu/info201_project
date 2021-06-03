@@ -147,7 +147,7 @@ fifth_page <- tabPanel(
            like music type and demographics. It contains reasonable high quality information and there are only a few missing data. 
            However, there are some bias because the data is collected from young people in Slovakian so the results could be based on 
            their cultures, backgrounds, and trends. These bias of age and locations would means “rock” may not be the most popular music 
-           type in other region or at other ages. In addition, gender column only includes male and female. This mould exclude some people 
+           type in other region or at other ages. In addition, gender column only includes male and female. This would exclude some people 
            from the participants. Since the participants are friends invited from students of Stats class in FSEV UK, these students are more 
            likely to invite friends who have a similar music preference. This could also cause a bias."),
     h3("Future ideas"),
