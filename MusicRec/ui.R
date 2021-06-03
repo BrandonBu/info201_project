@@ -10,14 +10,11 @@ data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
 first_page <- tabPanel(
   "About us",
   mainPanel(
-    tags$img(src = "Logo.jpg", height = 100, width = 100), 
-    h3("App Introduction"), 
+    tags$span(img(src = "Logo.jpg", height = 100, width = 100), tags$span(tags$h3("App Introduction"))), 
     tags$p("This application helps visualize the data of different factors that could possibly have correlation with the choice of various genre of music. These include: gender, education level, and time spends on internet everyday. In the second page, Table & Plots, there are some widgets that users could interact with to find out the elements that play a crucial role in users' music tastes."),
     tags$a(href="https://www.kaggle.com/boltmaud/musics-depending-on-demographic-data/data?select=rules.json", "Click here to view data source!"),
     h3("Group Member Description"),
-    tags$img(src = "song1.png", height = 200, width = 150),
-    h5("Brandon Bu"),
-    tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Dancing with your ghost"),
+    tags$span(img(src = "song1.png", height = 200, width = 150), tags$span(h5("Brandon Bu")), tags$span(tags$p("Male, Education Level: college, Internet usage: most of the day, Favorite song: Dancing with your ghost"))),
     tags$img(src = "song2.png", height = 200, width = 150),
     h5("Mina Gao"),
     tags$p("Female, Education Level: college, Internet usage: most of the day, Favorite song: Good Day - Surfaces"),
@@ -96,7 +93,8 @@ fourth_page <- tabPanel(
   mainPanel(
     tags$img(src = "summary1.png", height = 400, width = 1200), 
     tags$img(src = "summary2.png", height = 400, width = 1200), 
-    h4("According to the results from our table, we realized that regardless of the gender and internet usage, college students like rock music the most.")
+    h6("According to the results from our table, we realized that regardless of the gender and internet usage, college students like rock music the most. As for our data quality, 
+      the sample size of our data is about 1000 and that there are only a few missing data. However, there are some bias because the gender column only includes females and males.")
   )
 )
 
