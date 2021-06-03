@@ -2,13 +2,14 @@ library("shiny")
 library("ggplot2")
 library("dplyr")
 library("tidyr")
+library("shinythemes")
 
 music <- read.csv("data/responses.csv", stringsAsFactors=FALSE)
 rawData <- read.csv("data/responses.csv")
 data <- select(rawData, 141, 145, 2, 133, 147, (3:19))
 
 first_page <- tabPanel(
-  "Project Overview", includeCSS("style.css"),
+  "Project Overview",
   mainPanel(
     tags$img(src = "Logo.jpg", height = 200, width = 200), h1("App Introduction", style = "display: inline"),
     h3("Things we want our audience to explore:"), 
@@ -49,7 +50,7 @@ sixth_page <- tabPanel(
 )
 
 second_page <- tabPanel(
-  "Plot",
+  "Test Your Genre",
   sidebarLayout(
     sidebarPanel(
       uiOutput("Gender"),
@@ -75,7 +76,7 @@ second_page <- tabPanel(
 
 third_page <- 
   tabPanel(
-  "Line plot",
+  "Male/Female Interest towards Genres",
   sidebarLayout(
   sidebarPanel(
     uiOutput("Genre")
@@ -89,7 +90,7 @@ third_page <-
 
 
 fourth_page <- tabPanel(
-  "Table",
+  "Searching Table",
   fluidRow(
     column(4,
            selectInput("age",
@@ -135,11 +136,13 @@ fifth_page <- tabPanel(
   )
 )
 
-ui <- navbarPage(title = span("Music Preference Analysis", style = "default_bg: #DEEBF7; color: black"),
-                 first_page,
-                 second_page,
-                 third_page,
-                 fourth_page,
-                 fifth_page,
-                 sixth_page
+ui <- fluidPage(theme = shinytheme("flatly"),
+                navbarPage("Music Preference Analysis",
+                           first_page,
+                           second_page,
+                           third_page,
+                           fourth_page,
+                           fifth_page,
+                           sixth_page
+                )
 )

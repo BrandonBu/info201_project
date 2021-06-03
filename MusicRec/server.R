@@ -128,7 +128,7 @@ shinyServer(function(input, output) {
         
         ggplot(final_df, aes(x = genres, y = values, fill = ToHighlight)) + geom_bar(stat='identity') + 
             ggtitle("People with Similar Demographics Like You Are More Likely to Like...") + 
-            scale_fill_manual( values = c( "yes"="blue1", "no"="orange1" ), guide = FALSE ) +
+            scale_fill_manual( values = c( "yes"="#1F65CC", "no"="orange1" ), guide = FALSE ) +
             ylab("interest values") +
             theme(plot.title = element_text(size = 20, face = "bold"),
                 axis.title.x = element_text(size= 14),
@@ -164,7 +164,7 @@ shinyServer(function(input, output) {
         
         ggplot(data, aes(x = genres, y = values, fill = ToHighlight)) + geom_bar(stat='identity') + 
             ggtitle("People Surveyed Are More Likely to Like...") + 
-            scale_fill_manual( values = c( "yes"="blue1", "no"="orange1" ), guide = FALSE ) +
+            scale_fill_manual( values = c( "yes"="#1F65CC", "no"="orange1" ), guide = FALSE ) +
             ylab("interest values") +
             theme(plot.title = element_text(size = 20, face = "bold"),
                   axis.title.x = element_text(size= 14),
@@ -178,7 +178,12 @@ shinyServer(function(input, output) {
         
         ggplot() + 
             geom_line(data = male_data, aes(x = Age, y = mean), color = "darkred") + 
-            geom_line(data = female_data, aes(x = Age, y = mean), color="steelblue")
+            geom_line(data = female_data, aes(x = Age, y = mean), color="steelblue") +
+            ggtitle("Male vs. Female Interest in Different Genres as Age Changes") + 
+            ylab("interest values") +
+            theme(plot.title = element_text(size = 20, face = "bold"),
+                  axis.title.x = element_text(size= 14),
+                  axis.title.y = element_text(size= 14))
     })
     
     output$Genre <- renderUI({
