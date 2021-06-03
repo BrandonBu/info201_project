@@ -41,6 +41,7 @@ shinyServer(function(input, output) {
         if(nrow(data) != 0) {
             ggplot(data, aes(x = "", y = observation, fill = interest)) +
                 geom_bar(stat='identity', width = 1) + 
+                ggtitle("How People With Similar Demographics Like You Enjoy Music") + 
                 coord_polar("y", start=0) +
                 theme_void()
         }
