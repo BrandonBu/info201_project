@@ -93,6 +93,7 @@ third_page <- tabPanel(
 fourth_page <- tabPanel(
   "Summary",
   mainPanel(
+    plotOutput("summary_graph"),
     tags$img(src = "summary1.png", height = 400, width = 1200), 
     tags$img(src = "summary2.png", height = 400, width = 1200), 
     h6("According to the results from our table, we realized that regardless of the gender and internet usage, college students like rock music the most. As for our data quality, 

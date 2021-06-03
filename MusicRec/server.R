@@ -55,7 +55,7 @@ shinyServer(function(input, output) {
     })
     
     bar.data.process <- function(data) {
-        genre_data <- sample()
+        genre_data <- data
         
         dance <- genre_data$Dance
         folk <- genre_data$Folk
@@ -100,7 +100,7 @@ shinyServer(function(input, output) {
         data <- sample()
         final_df <- bar.data.process(data)
         ggplot(final_df, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1") + 
-            ggtitle("Number of Sightings in Different Shapes in US/CA") + 
+            ggtitle("People with Similar Demographics Like You Are More Likely to Like...") + 
             ylab("interest values") +
             theme(plot.title = element_text(size = 20, face = "bold"),
                 axis.title.x = element_text(size= 14),
@@ -121,7 +121,15 @@ shinyServer(function(input, output) {
         }
     })
     
-    output 
+    output$summary_graph <- renderPlot({
+        data <- bar.data.process(music)
+        ggplot(data, aes(x = genres, y = values)) + geom_bar(stat='identity', fill = "orange1") + 
+            ggtitle("People Surveyed Are More Likely to Like...") + 
+            ylab("interest values") +
+            theme(plot.title = element_text(size = 20, face = "bold"),
+                  axis.title.x = element_text(size= 14),
+                  axis.title.y = element_text(size= 14))
+    })
     
     output$Gender <- renderUI({
         radioButtons("Gender", label = "Gender",
