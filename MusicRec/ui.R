@@ -62,11 +62,15 @@ second_page <- tabPanel(
     mainPanel(
       tabsetPanel(
         tabPanel("Genre analysis",
+                 br(),
                  textOutput("genre_description"),
+                 br(),
                  plotOutput("genre_bar"),
                  htmlOutput("bar_message")),
         tabPanel("Pie",
+                 br(),
                  textOutput("pie_description"),
+                 br(),
                  plotOutput("music_pie"),
                  textOutput("pie_message"))
       )
@@ -124,6 +128,7 @@ fourth_page <- tabPanel(
     )
   ),
   textOutput("table_description"),
+  br(),
   DT::dataTableOutput("table"),
 )
 
